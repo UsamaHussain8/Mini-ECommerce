@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Products
+{% endblock %}
+
+{% block css_files %}
+<link
+rel="stylesheet"
+href="{% static 'Products/style.css' %}"
+/>
+<link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+{% endblock %}
+
+{% block content %}
+<div class="container my-2 rounded-2">
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="ratio ratio-4x3">
+            <img src="{% static 'Products/'|add:product.name|add:'.jpeg' %}" class="card-img-top" alt="{{ product.name }}">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.excerpt }}</p>
+          <a
+            href="{% url 'product_details' product.slug %}"
+            class="btn btn-success"
+            >Show Details</a
+          >
+          <a
+            href="{% url 'product_details' product.slug %}"
+            class="btn btn-success"
+            >Show Details</a
+          >
+        </div>
+      </div>
+    </div>
+    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div>
+    <div class="row">
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
