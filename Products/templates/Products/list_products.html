@@ -30,15 +30,20 @@ href="{% static 'Products/style.css' %}"
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text">{{ product.excerpt }}</p>
+          <ul>
+            {% for tag in tags %}
+              <li>{{ tag.caption }}</li>
+            {% endfor %}
+          </ul>
           <a
             href="{% url 'product_details' product.slug %}"
             class="btn btn-success"
             >Show Details</a
           >
           <a
-            href="{% url 'product_details' product.slug %}"
+            href="{% url 'add_cart_item' product.slug %}"
             class="btn btn-success"
-            >Show Details</a
+            >Add to Cart</a
           >
         </div>
       </div>

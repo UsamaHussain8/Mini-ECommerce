@@ -9,7 +9,7 @@ class Tag(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=50, null=False)
-    slug = models.SlugField(null=False, blank=False)
+    slug = models.SlugField(null=False, blank=False, unique=True)
     price = models.IntegerField(null=False)
     description = models.TextField(null=True)
     excerpt = models.CharField(max_length=150, null=True)
