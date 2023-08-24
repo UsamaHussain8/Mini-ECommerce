@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'social_django',
     'allauth.socialaccount', 
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook', 
 ]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
@@ -56,6 +58,9 @@ AUTHENTICATION_BACKENDS = (
   
  #used for social authentications
  'allauth.account.auth_backends.AuthenticationBackend',
+ 'social_core.backends.facebook.FacebookOAuth2',
+ 'social_core.backends.twitter.TwitterOAuth',
+ 'social_core.backends.github.GithubOAuth2',
  )
 SITE_ID = 1
 
@@ -81,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'MiniECommerce.urls'
@@ -96,6 +102,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -156,6 +164,8 @@ STATICFILES_DIRS = (
     ('Products', os.path.join(BASE_DIR, 'Products', 'static', "Products")),
 )
 
+SOCIAL_AUTH_FACEBOOK_KEY = '662612315804279'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'afcc82d08ac789940481cfa222726386'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -27,4 +27,6 @@ urlpatterns = [
     path("cart/", include("Cart.urls")),
     path("accounts/", include("django.contrib.auth.urls")), 
     path('socialaccounts/', include('allauth.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
+    
 ]
