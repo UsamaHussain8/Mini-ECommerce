@@ -9,9 +9,11 @@
     <ul class="list-group">
         <li class="list-group list-group-flush">
             {% for item in items %}
-                {{ item }} 
-            {% endfor %}
+                {{ item }}
+            {% endfor %} 
         </li>
     </ul>
+    <br>
+    <p> Total price: {{ price }} </p>
 </div>
 {% endblock %}

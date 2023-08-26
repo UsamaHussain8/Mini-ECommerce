@@ -19,4 +19,6 @@ def add_item_to_cart(request, slug):
 def display_cart(request):
     cart = Cart.objects.get(user = request.user)
     cart_item = list(CartItem.objects.filter(cart = cart))
-    return render(request, "Cart/cart_details.html", context={"items": cart_item})
+    total_price = cart.calculate_total_price()
+    return render(request, "Cart/cart_details.html", 
+                  context={"items": cart_item, "price": total_price})
