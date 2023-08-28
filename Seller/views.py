@@ -11,7 +11,7 @@ def index(request):
 def successful(request):
     return render(request, "Seller/successful.html")
 
-class ProductFormView(FormView):
+class ProductFormView(LoginRequiredMixin, FormView):
     template_name = "Seller/add_product.html"
     form_class = ProductForm
     success_url = "thanks"

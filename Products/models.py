@@ -10,10 +10,10 @@ class Tag(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=50, null=False)
     slug = models.SlugField(null=False, blank=False, unique=True)
-    price = models.IntegerField(null=False)
-    description = models.TextField(null=False)
-    excerpt = models.CharField(max_length=150, default='')
-    image = models.ImageField(upload_to="images")
+    price = models.IntegerField(null=False, default=1)
+    description = models.TextField(null=False, default='')
+    excerpt = models.CharField(max_length=150, default='', null=False)
+    image = models.ImageField(upload_to="images", default="images/default.jpeg")
     tags = models.ManyToManyField(Tag)
 
     def __str__(self) -> str:
