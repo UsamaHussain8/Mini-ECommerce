@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'core',
     'Products',
     'Cart',
+    'Seller',
     'django.contrib.sites',
     'allauth',
     'allauth.account',

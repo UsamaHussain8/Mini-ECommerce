@@ -11,8 +11,8 @@ class Product(models.Model):
     name = models.CharField(max_length=50, null=False)
     slug = models.SlugField(null=False, blank=False, unique=True)
     price = models.IntegerField(null=False)
-    description = models.TextField(null=True)
-    excerpt = models.CharField(max_length=150, null=True)
+    description = models.TextField(null=False)
+    excerpt = models.CharField(max_length=150, default='')
     image = models.ImageField(upload_to="images")
     tags = models.ManyToManyField(Tag)
 
