@@ -1,6 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-import uuid
+
 
 class Tag(models.Model):
     caption = models.CharField(max_length=20)
@@ -23,4 +23,3 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
-       
