@@ -1,0 +1,5 @@
+easybuy_env/
+easybuy_env/*
+__pycache__/
+.env
+*.pyc

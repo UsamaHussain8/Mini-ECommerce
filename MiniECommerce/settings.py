@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Products',
     'Cart',
     'Seller',
+    'Reviews',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -50,6 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount', 
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook', 
+    'allauth.socialaccount.providers.amazon',
+    'allauth.socialaccount.providers.twitter',
 ]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
@@ -88,6 +91,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'MiniECommerce.urls'
