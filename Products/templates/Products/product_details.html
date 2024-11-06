@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="container-lg">
+        <h3> {{ product.name }} </h3>
+        {{ product.description }}   
+        
+        <form method="post" class="form-control-color">
+            {% csrf_token %}
+            {{ form }}
+        </form>
+{% endblock %}

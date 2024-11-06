@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add Product
+{% endblock %}
+
+{% block content %}
+    <form method="POST" class="form-control-color", enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-success"> Add Product </button>
+    </form>
+
+
+{% endblock %}
