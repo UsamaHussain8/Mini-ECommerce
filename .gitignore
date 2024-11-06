@@ -2,4 +2,10 @@ easybuy_env/
 easybuy_env/*
 __pycache__/
 .env
+*.sqlite3
+*.pyo
 *.pyc
+__pycache__
+/env
+.vscode/
+.vscode
