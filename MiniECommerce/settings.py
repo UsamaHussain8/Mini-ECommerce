@@ -12,18 +12,20 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-import environ # type: ignore
-env = environ.Env()
-environ.Env.read_env()
+# import environ # type: ignore
+# env = environ.Env()
+# environ.Env.read_env()
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -68,7 +70,6 @@ AUTHENTICATION_BACKENDS = (
  'allauth.account.auth_backends.AuthenticationBackend',
  'social_core.backends.facebook.FacebookOAuth2',
  'social_core.backends.twitter.TwitterOAuth',
- 'social_core.backends.github.GithubOAuth2',
  )
 SITE_ID = 1
 
@@ -80,7 +81,12 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
-        }
+        },
+        'APP': {
+            'client_id': os.getenv("GOOGLE_CLIENT_ID"),
+            'secret': os.getenv("GOOGLE_CLIENT_SECRET"),
+        },
+        'EMAIL_AUTHENTICATION': True
     }
 }
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -127,11 +133,11 @@ WSGI_APPLICATION = 'MiniECommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
+        'NAME': "MiniECommerceDB",
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': "localhost",
+        'PORT': 5432,
     }
 }
 

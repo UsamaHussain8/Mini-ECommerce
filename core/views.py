@@ -34,6 +34,7 @@ def register(request):
       username = form.cleaned_data.get('username')
       messages.success(request, f"New account created: {username}")
       login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+      print(user)
     else:
       messages.error(request, "Account creation failed")
 
