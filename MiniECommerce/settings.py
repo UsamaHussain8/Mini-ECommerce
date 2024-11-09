@@ -31,8 +31,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0a3e-206-84-142-22.ngrok-free.app', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://0a3e-206-84-142-22.ngrok-free.app',  # Replace with your current ngrok URL
+]
 
 # Application definition
 
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_sass',
+    'django_extensions',
     'crispy_forms',
     'core',
     'Products',
@@ -87,6 +91,30 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': os.getenv("GOOGLE_CLIENT_SECRET"),
         },
         'EMAIL_AUTHENTICATION': True
+    },
+    'facebook': {
+        'APP': {
+            'client_id':os.getenv("SOCIAL_AUTH_FACEBOOK_KEY"),
+            'secret': os.getenv("SOCIAL_AUTH_FACEBOOK_SECRET")
+        },
+        'METHOD': 'oauth2',  
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'picture',
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v21.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v21.0',
     }
 }
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -133,11 +161,11 @@ WSGI_APPLICATION = 'MiniECommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "MiniECommerceDB",
+        'NAME': os.getenv("DB_NAME"),
         'USER': os.getenv("DB_USER"),
         'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': "localhost",
-        'PORT': 5432,
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
     }
 }
 
@@ -183,8 +211,8 @@ STATICFILES_DIRS = (
     ('Products', os.path.join(BASE_DIR, 'Products', 'static', "Products")),
 )
 
-SOCIAL_AUTH_FACEBOOK_KEY = '662612315804279'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'afcc82d08ac789940481cfa222726386'
+SOCIAL_AUTH_FACEBOOK_KEY = os.getenv("SOCIAL_AUTH_FACEBOOK_KEY")
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv("SOCIAL_AUTH_FACEBOOK_SECRET")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
