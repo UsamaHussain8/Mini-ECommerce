@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import UserSignUpForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
+from allauth.socialaccount.models import SocialAccount
 
 def index(request):
     return render(request, "core/hello.html")
@@ -42,3 +43,10 @@ def register(request):
 
   form = UserCreationForm()
   return render(request, "core/signup.html", {"form": form})
+
+def get_profile_picture(user):
+    try:
+        social_account = SocialAccount.objects.get(user=user, provider='facebook')
+        return social_account.extra_data.get('picture', {}).get('data', {}).get('url')
+    except SocialAccount.DoesNotExist:
+        return None
