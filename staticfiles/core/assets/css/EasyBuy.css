@@ -1,0 +1,11 @@
+@media (min-width: 992px) {
+  a, p, h1, h2, h3, h4, h5, h6, li, ul {
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+  }
+}
+
+a {
+}
+
