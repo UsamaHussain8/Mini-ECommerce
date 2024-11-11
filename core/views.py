@@ -8,7 +8,10 @@ from django.contrib.auth import login, logout
 from allauth.socialaccount.models import SocialAccount
 
 def index(request):
-    return render(request, "core/hello.html")
+    return render(request, "core/index.html")
+
+def contacts(request):
+    return render(request, "core/contacts.html")
 
 def create_user(request):
     if request.method == "POST":
