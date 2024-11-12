@@ -210,13 +210,13 @@ STATICFILES_FINDERS = [
     #'compressor.finders.CompressorFinder'
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
-    #BASE_DIR / 'staticfiles',
+    BASE_DIR / 'staticfiles',
     ('core', os.path.join(BASE_DIR, 'core', 'static', "core")),
     ('Products', os.path.join(BASE_DIR, 'Products', 'static', "Products")),
 )
