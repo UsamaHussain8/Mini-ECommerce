@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect # type: ignore
+from django.shortcuts import render, redirect 
 from .models import Cart, CartItem
 from Products.models import Product
 

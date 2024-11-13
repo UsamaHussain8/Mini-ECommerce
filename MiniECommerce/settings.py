@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from django.contrib.messages import constants as messages
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -221,6 +223,8 @@ STATICFILES_DIRS = (
     ('Products', os.path.join(BASE_DIR, 'Products', 'static', "Products")),
 )
 
+#AUTH_USER_MODEL = 'core.StoreUser'
+
 SOCIAL_AUTH_FACEBOOK_KEY = os.getenv("SOCIAL_AUTH_FACEBOOK_KEY")
 SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv("SOCIAL_AUTH_FACEBOOK_SECRET")
 
@@ -233,3 +237,11 @@ LOGIN_URL = "login_view"
 LOGIN_REDIRECT_URL = "welcome"
 LOGOUT_URL = "logout_view"
 LOGOUT_REDIRECT_URL = "login_view"
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

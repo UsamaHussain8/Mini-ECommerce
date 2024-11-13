@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from core.models import StoreUser as User
 from Products.models import Product
 
 class Seller(models.Model):

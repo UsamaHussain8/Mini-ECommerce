@@ -44,8 +44,8 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link active" href="{% url 'welcome' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'contacts' %}"><span style="color: rgba(0, 0, 0, 0.8);">Contacts</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacts.html">Luck Wheel</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Luck Wheel</a></li>
                 </ul>
                 <div data-reflow-type="product-search" style="padding-right: 0px;margin-bottom: 0px;margin-top: -3px;margin-right: 2px;margin-left: -6px;padding-left: 0px;">
                   <div class="reflow-product-search">
@@ -58,7 +58,13 @@
         </div>
     </nav>
 
-    {% block content %} {% endblock %}
+    <div class="content">
+        <div class="container-fluid">
+            {% include 'messages.html' %}
+
+            {% block content %} {% endblock %}
+        </div>
+    </div>
 </body>
 
 <footer class="bg-primary-gradient">
