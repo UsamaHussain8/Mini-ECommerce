@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User as AUTH_USER
+from core.models import StoreUser as AUTH_USER
 from Products.models import Product
 
 class Review(models.Model):

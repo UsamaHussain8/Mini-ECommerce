@@ -45,8 +45,8 @@
                               </svg></div>
                           <form method="post" data-bs-theme="light">
                               {% csrf_token %}
-                              <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-                              <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+                              <div class="mb-3"><input class="form-control" type="text" id="username" name="username" placeholder="User Name"></div>
+                              <div class="mb-3"><input class="form-control" type="password" id="password" name="password" placeholder="Password"></div>
                               <div class="mb-3"><button class="btn btn-primary shadow d-block w-100" type="submit">Log in</button></div>
                           </form>
                           {% comment %} <p class="text-muted">Forgot your password?</p> {% endcomment %}
