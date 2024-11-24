@@ -223,8 +223,6 @@ STATICFILES_DIRS = (
     ('Products', os.path.join(BASE_DIR, 'Products', 'static', "Products")),
 )
 
-#AUTH_USER_MODEL = 'core.StoreUser'
-
 SOCIAL_AUTH_FACEBOOK_KEY = os.getenv("SOCIAL_AUTH_FACEBOOK_KEY")
 SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv("SOCIAL_AUTH_FACEBOOK_SECRET")
 

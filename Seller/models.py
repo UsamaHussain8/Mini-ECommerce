@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import StoreUser as User
+from core.models import User
 from Products.models import Product
 
 class Seller(models.Model):
