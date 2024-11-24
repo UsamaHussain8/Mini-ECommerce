@@ -3,13 +3,11 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import UserSignUpForm
+from .forms import UserForm, StoreUserForm
 from .models import StoreUser
 from django.contrib.auth import login, logout
-from django.db import IntegrityError
-
-# from django.conf import settings
-# user = settings.AUTH_USER_MODEL
+from django.db import IntegrityError, transaction
+import pdb
 
 def index(request):
     return render(request, "core/index.html")
@@ -17,47 +15,58 @@ def index(request):
 def contacts(request):
     return render(request, "core/contacts.html")
 
+@transaction.atomic
 def register(request):
   if request.method == "POST":
-    form = UserSignUpForm(request.POST)
-    if form.is_valid():
-      try:
-        user = form.save()
-        username = form.cleaned_data.get('username')
+    user_form = UserForm(request.POST)
+    store_user_form = StoreUserForm(request.POST)
+    
+    if user_form.is_valid() and store_user_form.is_valid():
+        user = user_form.save()
+        user.set_password(user_form.cleaned_data["password"])  # Ensure password is hashed
+        user.save()
+        
+        store_user = store_user_form.save(commit=False)
+        store_user.user = user
+        store_user.contact_number = store_user_form.cleaned_data.get('contact_number')
+        store_user.save()
+           
+        username = user_form.cleaned_data.get('username')
         messages.success(request, f"Thanks for signing up: {username}")
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-      except IntegrityError:
-         form.add_error('contact_number', "This contact number is already registered.")
+      
+        return redirect("welcome")
     else:
       messages.error(request, "Account creation failed")
-      return render(request, "core/signup.html", context={"form": form})
+      return render(request, "core/signup.html", context={"user_form": user_form, "store_user_form": store_user_form})
 
-    return redirect("welcome")
-
-  form = UserSignUpForm()
-  return render(request, "core/signup.html", context={"form": form})
+  user_form = UserForm()
+  store_user_form = StoreUserForm()
+  return render(request, "core/signup.html", context={"user_form": user_form, "store_user_form": store_user_form})
 
 def login_view(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+  if request.method == "POST":
+      username = request.POST.get('username')
+      password = request.POST.get('password')
+      print(f"{username}, {password}")
+      user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            messages.success(request, f"Logged in as: {username}")
-            return redirect('welcome')
-        else:
-            messages.error(request, "Username or password is incorrect")
+      if user is not None:
+          login(request, user)
+          messages.success(request, f"Logged in as: {username}")
+          return redirect('welcome')
+      else:
+          messages.error(request, "Username or password is incorrect")
 
-    return render(request, 'core/login.html')
+  return render(request, 'core/login.html')
 
 def logout_view(request):
-    if request.method == "POST":
-        logout(request)
-        messages.success(request, "Logged out")
-
-    return redirect('login_view')
+  if request.method == "POST":
+      logout(request)
+      messages.success(request, "Logged out")
+      print("Logged out")
+      
+  return redirect('login_view')
 
 # def create_user(request):
 #     if request.method == "POST":
