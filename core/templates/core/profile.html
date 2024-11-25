@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Profile{% endblock %}
+
+{% block css_files %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="container-fluid text-center justify-content-center">
+            <h1>Profile</h1>
+            <hr>
+            <p>Username: {{ user.username }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>First Name: {{ user.first_name }}</p>
+            <p>Last Name: {{ user.last_name }}</p>
+            <p>Joined: {{ user.date_joined }}</p>
+            <p>Num Orders: {{ user.storeuser.num_orders }}</p>
+            <p>Contact Number: {{ user.storeuser.contact_number }}</p>
+            <p>Address: {{ user.storeuser.address }}</p>
+        </div>
+    </div>
+    {% comment %} <div class="col-md-6">
+        <h1>Actions</h1>
+        <hr>
+        <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
+        <a href="{% url 'change_password' %}" class="btn btn-primary">Change Password</a>
+    </div> {% endcomment %}
+</div>
+{% endblock %}
+
+{% block js_files %}
+{% endblock %}
