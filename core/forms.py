@@ -17,10 +17,11 @@ class UserForm(forms.ModelForm):
 class StoreUserForm(forms.ModelForm):
     class Meta:
         model = StoreUser
-        fields = ['contact_number']
+        fields = ['contact_number', 'address']
         widgets = {
             'contact_number': forms.TextInput(attrs={'class': 'form-control', 'pattern': r'^\+92\d{10}$', 
                 'placeholder': '+921234567890',}),
+            'address': forms.Textarea(attrs={'class': 'form-control'}),
         }
         
     def clean_contact_number(self):

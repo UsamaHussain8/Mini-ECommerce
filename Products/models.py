@@ -8,9 +8,22 @@ class Tag(models.Model):
         return self.caption
 
 class Product(models.Model):
+    CATEGORY_CHOICES = [
+        ('electronics', 'Electronics'),
+        ('fashion', 'Fashion'),
+        ('books', 'Books'),
+        ('toys', 'Toys'),
+        ('mobiles', 'Mobiles'),
+        ('laptops', 'Laptops'),
+        ('accessories', 'Accessories'),
+        ('other', 'Other'),
+    ]
+
     name = models.CharField(max_length=50, null=False)
     slug = models.SlugField(null=False, blank=False, unique=True)
-    price = models.IntegerField(null=False, default=1)
+    price = models.PositiveIntegerField(null=False, default=1)
+    quantity = models.PositiveIntegerField(null=False, default=0)
+    category = models.CharField(max_length=50, default='', null=False, choices=CATEGORY_CHOICES)
     description = models.TextField(null=False, default='')
     excerpt = models.CharField(max_length=150, default='', null=False)
     image = models.ImageField(upload_to="images", default="images/default.jpeg")
