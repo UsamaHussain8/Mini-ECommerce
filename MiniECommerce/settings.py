@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_sass',
     'django_extensions',
     'crispy_forms',
+    'sslserver',
     'core',
     'Products',
     'Cart',
