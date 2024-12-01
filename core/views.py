@@ -10,10 +10,10 @@ from .forms import UserForm, StoreUserForm
 from .models import StoreUser
 
 def index(request):
-    return render(request, "core/index.html")
+    return render(request, "core/index.html", {'segment': 'home'})
 
 def contacts(request):
-    return render(request, "core/contacts.html")
+    return render(request, "core/contacts.html", {'segment': 'contacts'})
 
 @transaction.atomic
 def register(request):

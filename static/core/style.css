@@ -1,0 +1,78 @@
+/* #body {
+    font-family: 'Nunito';
+    background-color:  #5d8fc9;
+  }
+
+  #login-card{
+      width:350px;
+      border-radius: 25px;
+      margin:150px auto;
+  }
+  
+  #username{
+      border-radius:30px;
+      background-color: #ebf0fc;
+      border-color: #ebf0fc;
+      color: #9da3b0;
+  }
+  
+  #button{
+    border-radius:30px;  
+  }
+  
+  #btn{
+     position: absolute; 
+     bottom: -35px; 
+     padding: 5px;
+     margin: 0px 55px;
+     align-items: center;
+     border-radius: 5px
+  }
+
+  #container{
+    margin-top:25px;
+  } */
+  
+  /* .btn-circle.btn-sm { 
+    width: 40px; 
+    height: 40px; 
+    padding: 2px 0px; 
+    border-radius: 25px; 
+    font-size: 14px; 
+    text-align: center;              
+    margin: 8px;
+} */
+
+.btn-circle.btn-sm { 
+    width: 40px; 
+    height: 40px; 
+    padding: 2px 0px; 
+    border-radius: 50%; /* Makes it a circle */
+    font-size: 14px; 
+    text-align: center;              
+    line-height: 36px; /* Centers the icon vertically */
+    margin: 8px;
+    color: white; /* Icon color */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-facebook {
+    background-color: #4267B2; /* Facebook blue */
+    border: none;
+}
+
+.btn-facebook:hover {
+    background-color: #365899; /* Darker Facebook blue on hover */
+    color: white; /* Ensure icon remains white */
+}
+
+/* Google button style */
+.btn-google {
+    background-color: #DB4437; /* Google red */
+    border: none;
+}
+
+.btn-google:hover {
+    background-color: #C23321; /* Darker Google red on hover */
+    color: white; /* Ensure icon remains white */
+}

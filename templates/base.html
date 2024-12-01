@@ -44,10 +44,10 @@
         <span>EasyBuy</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="{% url 'welcome' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'contacts' %}"><span style="color: rgba(0, 0, 0, 0.8);">Contacts</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacts.html">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products.html">Luck Wheel</a></li>
+                    <li class="nav-item"><a class="nav-link {% if 'home' in segment %} active {% endif %}" href="{% url 'welcome' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link {% if 'contacts' in segment %} active {% endif %}" href="{% url 'contacts' %}"><span style="color: rgba(0, 0, 0, 0.8);">Contacts</span></a></li>
+                    <li class="nav-item"><a class="nav-link {% if 'products' in segment %} active {% endif %}" href="{% url 'products_list' %}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link {% if 'luck_wheel' in segment %} active {% endif %}" href="products.html">Luck Wheel</a></li>
                 </ul>
                 <div data-reflow-type="product-search" style="padding-right: 0px; margin-bottom: 0px; margin-top: -3px; margin-right: 2px; margin-left: -6px; padding-left: 0px;">
                   <div class="reflow-product-search">

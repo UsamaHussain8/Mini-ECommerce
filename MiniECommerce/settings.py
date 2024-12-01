@@ -213,15 +213,15 @@ STATICFILES_FINDERS = [
     #'compressor.finders.CompressorFinder'
 ]
 
-#STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
-    BASE_DIR / 'staticfiles',
-    ('core', os.path.join(BASE_DIR, 'core', 'static', "core")),
-    ('Products', os.path.join(BASE_DIR, 'Products', 'static', "Products")),
+    BASE_DIR / 'static',
+    ('core', os.path.join(BASE_DIR, 'core', 'static')),
+    ('Products', os.path.join(BASE_DIR, 'Products', 'static')),
 )
 
 SOCIAL_AUTH_FACEBOOK_KEY = os.getenv("SOCIAL_AUTH_FACEBOOK_KEY")
@@ -232,11 +232,6 @@ SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv("SOCIAL_AUTH_FACEBOOK_SECRET")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = "login_view"
-LOGIN_REDIRECT_URL = "welcome"
-LOGOUT_URL = "logout_view"
-LOGOUT_REDIRECT_URL = "login_view"
-
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',
@@ -244,3 +239,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+LOGIN_URL = "login_view"
+LOGIN_REDIRECT_URL = "welcome"
+LOGOUT_URL = "logout_view"
+LOGOUT_REDIRECT_URL = "login_view"
