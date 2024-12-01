@@ -26,7 +26,7 @@ class Product(models.Model):
     category = models.CharField(max_length=50, default='', null=False, choices=CATEGORY_CHOICES)
     description = models.TextField(null=False, default='')
     excerpt = models.CharField(max_length=150, default='', null=False)
-    image = models.ImageField(upload_to="images", default="images/default.jpeg")
+    image = models.ImageField(upload_to="images/", default="images/default.jpeg")
     tags = models.ManyToManyField(Tag)
 
     def __str__(self) -> str:

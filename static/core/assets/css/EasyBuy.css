@@ -1,0 +1,40 @@
+@media (min-width: 992px) {
+  a, p, h1, h2, h3, h4, h5, h6, li, ul {
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+  }
+}
+
+a {
+}
+
+/*
+Adjust Navbar Height
+.navbar {
+  padding-top: 0.3rem; 
+  padding-bottom: 0.3rem;
+}
+
+.navbar-brand {
+  padding: 0.25rem 0.5rem; 
+}
+
+.navbar-nav .nav-link {
+  padding: 0.3rem 0.5rem; 
+}
+
+.navbar-toggler {
+  padding: 0.2rem 0.5rem; 
+}
+*/
+
+/* .btn-circle.btn-sm { 
+  width: 40px; 
+  height: 40px; 
+  padding: 2px 0px; 
+  border-radius: 25px; 
+  font-size: 14px; 
+  text-align: center;              
+  margin: 8px;
+} */

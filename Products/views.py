@@ -11,21 +11,21 @@ from .models import Tag, Product
 @login_required(login_url="login_view")
 def list_products(request):
     products = Product.objects.all()
-    context = {"products": products}
-    return render(request, 'Products/list_products.html', context=context)
+    #context = {"products": products}
+    return render(request, 'Products/products.html', {'segment': 'products', "products": products})
 
 @login_required(login_url="login_view")
 def product_details(request, slug):
     product_inspected = Product.objects.get(slug=slug)
     context = {"product": product_inspected}
-    return render(request, 'Products/product_details.html', context)
+    return render(request, 'Products/product.html', context)
 
 class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     paginate_by = 10 
-    template_name = "Products/list_products.html"
+    template_name = "Products/products.html"
     context_object_name = "products"
-
+    segment = "products"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,7 +37,7 @@ class ProductListView(LoginRequiredMixin, ListView):
         return context
     
 class ReviewFormView(LoginRequiredMixin, FormView):
-    template_name = "Product/product_details.html"
+    template_name = "Product/product.html"
     form_class = ReviewForm
 
     def form_valid(self, form):
