@@ -39,8 +39,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://0a3e-206-84-142-22.ngrok-free.app',  # Replace with your current ngrok URL
 ]
 
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -217,6 +215,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+#MEDIA_URL = 'https://127.0.0.1:8000/media/'
 
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
