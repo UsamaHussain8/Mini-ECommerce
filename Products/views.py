@@ -8,7 +8,6 @@ from Reviews.forms import ReviewForm
 from Reviews.models import Review
 from .models import Tag, Product
 
-@login_required(login_url="login_view")
 def list_products(request):
     products = Product.objects.all()
     #context = {"products": products}
@@ -20,7 +19,7 @@ def product_details(request, slug):
     context = {"product": product_inspected}
     return render(request, 'Products/product.html', context)
 
-class ProductListView(LoginRequiredMixin, ListView):
+class ProductListView(ListView):
     model = Product
     paginate_by = 10 
     template_name = "Products/products.html"
