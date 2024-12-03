@@ -13,11 +13,10 @@ def list_products(request):
     #context = {"products": products}
     return render(request, 'Products/products.html', {'segment': 'products', "products": products})
 
-@login_required(login_url="login_view")
 def product_details(request, slug):
     product_inspected = Product.objects.get(slug=slug)
     context = {"product": product_inspected}
-    return render(request, 'Products/product.html', context)
+    return render(request, 'Products/product.html', {'segment': 'products', "product": product_inspected})
 
 class ProductListView(ListView):
     model = Product
@@ -32,7 +31,7 @@ class ProductListView(ListView):
         product_list = context['products']
         tags_list = [product.tags.all() for product in product_list]
         context['tags'] = tags_list
-        
+        context['segment'] = 'products'
         return context
     
 class ReviewFormView(LoginRequiredMixin, FormView):
