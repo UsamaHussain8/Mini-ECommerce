@@ -62,13 +62,19 @@
                     </li>
                     <li class="nav-item"><a class="nav-link {% if 'luck_wheel' in segment %} active {% endif %}" href="products.html">Luck Wheel</a></li>
                 </ul>
-                <div data-reflow-type="product-search" style="padding-right: 0px; margin-bottom: 0px; margin-top: -3px; margin-right: 2px; margin-left: -6px; padding-left: 0px;">
-                  <div class="reflow-product-search">
-                      <div class="ref-input-wrapper"><input class="ref-search" type="text" inputmode="search" placeholder="Search Products" /><span class="ref-cancel-search" style="display: none;"></span></div>
-                      <div class="ref-button" type="submit" style="display: none;">Search</div>
-                  </div>
+            </div>
+                <div class="d-flex">
+                    <form method="GET" action="{% url 'searched_products_list' %}">                    
+                        <div data-reflow-type="product-search" style="padding-right: 0px; margin-bottom: 0px; margin-top: -3px; margin-right: 2px; margin-left: -6px; padding-left: 0px;">
+                            <div class="reflow-product-search">
+                                <div class="ref-input-wrapper">
+                                    <input class="ref-search" name="search_products" value="{{ search_query }}" type="text" inputmode="search" placeholder="Search Products" /><span class="ref-cancel-search" style="display: none;"></span>
+                                </div>
+                                <div class="ref-button" type="submit" style="display: none;">Search</div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
                 <!-- Vertical bar -->
                 <div class="vr mx-3" style="border-left: 1px solid #ccc; height: 70px;"></div>
 
@@ -81,7 +87,6 @@
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                     >
-                    {% comment %} <i class="bi bi-person"></i> <!-- Bootstrap User Icon --> {% endcomment %}
                     <img src="{% static 'core/assets/img/brands/user-logo.png' %}" alt="Icon" class="icon" height="60px">
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -99,7 +104,6 @@
                         {% endif %}
                     </ul>
                 </div>
-            </div>
             <hr>
         </div>
     </nav>

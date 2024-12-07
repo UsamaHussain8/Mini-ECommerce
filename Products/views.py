@@ -32,7 +32,6 @@ class ProductListView(ListView):
     paginate_by = 10 
     template_name = "Products/products.html"
     context_object_name = "products"
-    segment = "products"
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,7 +40,32 @@ class ProductListView(ListView):
         tags_list = [product.tags.all() for product in product_list]
         context['tags'] = tags_list
         context['segment'] = 'products'
+        context['search_query'] = self.request.GET.get('search_products', '')
+
         return context
+    
+class ProductsSearchView(ListView):
+    model = Product
+    template_name = "Products/products.html"
+    context_object_name = "searched_products"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        product_list = context['searched_products']
+        tags_list = Tag.objects.all()
+        context['tags'] = tags_list
+        context['segment'] = 'products'
+        context['search_query'] = self.request.GET.get('search_products', '')
+
+        return context
+    
+    def get_queryset(self):
+        search_query = self.request.GET.get('search_products')
+        queryset = Product.objects.prefetch_related('tags').all()
+        if search_query:
+            return queryset.filter(name__icontains=search_query)
+        return queryset
     
 class ReviewFormView(LoginRequiredMixin, FormView):
     template_name = "Product/product.html"
