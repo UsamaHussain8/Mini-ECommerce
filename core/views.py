@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError, transaction
 from .forms import UserForm, StoreUserForm
 from .models import StoreUser
+from Products.models import Tag
 
 def index(request):
     return render(request, "core/index.html", {'segment': 'home'})

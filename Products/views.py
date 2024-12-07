@@ -18,6 +18,15 @@ def product_details(request, slug):
     context = {"product": product_inspected}
     return render(request, 'Products/product.html', {'segment': 'products', "product": product_inspected})
 
+def all_product_categories(request, category):
+    tags = Tag.objects.all()
+    return render(request, 'core/index.html', {'segment': 'products', "tags": tags})
+
+def product_categories(request, tag):
+    tag_obj=Tag.objects.get(caption=tag)
+    products = Product.objects.filter(tags=tag_obj)
+    return render(request, 'Products/products.html', {'segment': 'products', "products": products})
+
 class ProductListView(ListView):
     model = Product
     paginate_by = 10 
