@@ -35,6 +35,9 @@
 
     {% block css_files %}
     {% endblock %}
+
+    {% block js_files %}
+    {% endblock %}
   </head>
 
   <body>
@@ -164,5 +167,7 @@
 <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
 <script src="assets/js/bs-init.js"></script>
 <script src="assets/js/bold-and-bright.js"></script>
+
+{% block scripts %} {% endblock %}
 
 </html>
