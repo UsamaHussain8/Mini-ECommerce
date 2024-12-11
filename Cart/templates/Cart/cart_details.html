@@ -6,6 +6,10 @@
     Cart
 {% endblock %}
 
+{% block js_files %}
+<script src="{% static 'js/cart_count.js' %}" defer></script>
+{% endblock %}
+
 {% block content %}
 {% if not items %}
 <div class="container">
@@ -37,7 +41,7 @@
                                 <div class="ref-product-info">
                                     <div>
                                         <div class="ref-product-name">{{ item.product.name }}</div>
-                                        <div class="ref-product-category">{{ item.product.tags.caption }}</div>
+                                        <div class="ref-product-category">{{ item.product.tags.caption}}</div>
                                     </div>
                                     <div class="ref-product-price ref-mobile-product-price">Rs. {{ item.product.price }}</div>
                                 </div>
@@ -45,7 +49,7 @@
                                     <div class="ref-product-quantity">
                                         <div class="ref-quantity-container" data-reflow-product="1168761308" data-reflow-max-qty="999" data-reflow-quantity="2">
                                             <div class="ref-quantity-widget">
-                                                <div class="ref-decrease"><span></span></div><input type="text" value="{{ item.quantity }}" />
+                                                <div class="ref-decrease"><span></span></div><input class="ref-product-quantity" type="text" value="{{ item.quantity }}" />
                                                 <div class="ref-increase"><span></span></div>
                                             </div>
                                         </div>
@@ -80,117 +84,11 @@
                     </div>
                 </div>
                 {% endfor %}
-                {% comment %} <div class="ref-product" data-id="589605485" data-quantity="1" data-variant_id="199976733_s">
-                    <div class="ref-product-col">
-                        <div class="ref-product-wrapper"><img class="ref-product-photo" src="https://cdn.bootstrapstudio.io/products/product-18_sm.jpg" alt="Reusable Cup" />
-                            <div class="ref-product-data">
-                                <div class="ref-product-info">
-                                    <div>
-                                        <div class="ref-product-name">Reusable Cup</div>
-                                        <div class="ref-product-category">Cups</div>
-                                        <div class="ref-product-variants">
-                                            <div class="ref-product-variant">Size: S</div>
-                                        </div>
-                                        <div class="ref-product-personalization-holder"></div>
-                                    </div>
-                                    <div class="ref-product-price ref-mobile-product-price">$35.39</div>
-                                </div>
-                                <div class="ref-product-controls ref-mobile-product-controls">
-                                    <div class="ref-product-quantity">
-                                        <div class="ref-quantity-container" data-reflow-variant="199976733_s" data-reflow-product="589605485" data-reflow-max-qty="999" data-reflow-quantity="1">
-                                            <div class="ref-quantity-widget">
-                                                <div class="ref-decrease"><span></span></div><input type="text" value="1" />
-                                                <div class="ref-increase"><span></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="ref-product-qty-message"></div>
-                                    </div>
-                                    <div class="ref-product-remove"><svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 48 48">
-                                            <path fill="currentColor" d="M13.05 42q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.5H8v-3h9.4V6h13.2v1.5H40v3h-2.05V39q0 1.2-.9 2.1-.9.9-2.1.9Zm21.9-31.5h-21.9V39h21.9Zm-16.6 24.2h3V14.75h-3Zm8.3 0h3V14.75h-3Zm-13.6-24.2V39Z"></path>
-                                        </svg></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ref-price-col">
-                        <div class="ref-product-price">$35.39</div>
-                    </div>
-                    <div class="ref-quantity-col">
-                        <div class="ref-product-quantity">
-                            <div class="ref-quantity-container" data-reflow-variant="199976733_s" data-reflow-product="589605485" data-reflow-max-qty="999" data-reflow-quantity="2">
-                                <div class="ref-quantity-widget">
-                                    <div class="ref-decrease"><span></span></div><input type="text" value="1" />
-                                    <div class="ref-increase"><span></span></div>
-                                </div>
-                            </div>
-                            <div class="ref-product-qty-message"></div>
-                            <div class="ref-product-remove">Remove</div>
-                        </div>
-                    </div>
-                    <div class="ref-total-col">
-                        <div class="ref-product-total">
-                            <div class="ref-product-total-sum">$35.39</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ref-product" data-id="589605485" data-quantity="1" data-variant_id="199976733_m">
-                    <div class="ref-product-col">
-                        <div class="ref-product-wrapper"><img class="ref-product-photo" src="https://cdn.bootstrapstudio.io/products/product-18_sm.jpg" alt="Reusable Cup" />
-                            <div class="ref-product-data">
-                                <div class="ref-product-info">
-                                    <div>
-                                        <div class="ref-product-name">Reusable Cup</div>
-                                        <div class="ref-product-category">Cups</div>
-                                        <div class="ref-product-variants">
-                                            <div class="ref-product-variant">Size: M</div>
-                                        </div>
-                                        <div class="ref-product-personalization-holder"></div>
-                                    </div>
-                                    <div class="ref-product-price ref-mobile-product-price">$35.39</div>
-                                </div>
-                                <div class="ref-product-controls ref-mobile-product-controls">
-                                    <div class="ref-product-quantity">
-                                        <div class="ref-quantity-container" data-reflow-variant="199976733_m" data-reflow-product="589605485" data-reflow-max-qty="999" data-reflow-quantity="1">
-                                            <div class="ref-quantity-widget">
-                                                <div class="ref-decrease"><span></span></div><input type="text" value="1" />
-                                                <div class="ref-increase"><span></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="ref-product-qty-message"></div>
-                                    </div>
-                                    <div class="ref-product-remove"><svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 48 48">
-                                            <path fill="currentColor" d="M13.05 42q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.5H8v-3h9.4V6h13.2v1.5H40v3h-2.05V39q0 1.2-.9 2.1-.9.9-2.1.9Zm21.9-31.5h-21.9V39h21.9Zm-16.6 24.2h3V14.75h-3Zm8.3 0h3V14.75h-3Zm-13.6-24.2V39Z"></path>
-                                        </svg></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ref-price-col">
-                        <div class="ref-product-price">$35.39</div>
-                    </div>
-                    <div class="ref-quantity-col">
-                        <div class="ref-product-quantity">
-                            <div class="ref-quantity-container" data-reflow-variant="199976733_m" data-reflow-product="589605485" data-reflow-max-qty="999" data-reflow-quantity="1">
-                                <div class="ref-quantity-widget">
-                                    <div class="ref-decrease"><span></span></div><input type="text" value="1" />
-                                    <div class="ref-increase"><span></span></div>
-                                </div>
-                            </div>
-                            <div class="ref-product-qty-message"></div>
-                            <div class="ref-product-remove">Remove</div>
-                        </div>
-                    </div>
-                    <div class="ref-total-col">
-                        <div class="ref-product-total">
-                            <div class="ref-product-total-sum">$35.39</div>
-                        </div>
-                    </div>
-                </div>
-            </div> {% endcomment %}
+
             <div class="ref-footer">
                 <div class="ref-links"><a href="https://google.com" target="_blank">Terms &amp; Conditions</a><a href="https://google.com" target="_blank">Privacy Policy</a><a href="https://google.com" target="_blank">Refund Policy</a></div>
                 <div class="ref-totals">
-                    <div class="ref-subtotal">Subtotal: $107.46</div>
+                    <div class="ref-subtotal">Subtotal: Rs. {{ price }}</div>
                     <form class="ref-accept-terms" style="display: block;"><label><input id="ref-terms-agreement" type="checkbox" data-state-src="accept-terms" required /><span class="ref-terms-agreement-text"><span>I agree to the </span><a href="https://google.com">Terms &amp; Conditions</a><span>, </span><a href="https://google.com">Privacy Policy</a><span> and </span><a href="https://google.com">Refund Policy</a></span></label></form>
                     <div class="ref-row ref-checkout-buttons">
                         <div class="ref-paypal-express-checkout-holder">
@@ -356,4 +254,48 @@
     </div>
 </div>
 {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const apiUrl="{% url 'num_cart_items' %}";
+    document.addEventListener("DOMContentLoaded", () => {
+        // Function to calculate totals
+        function calculateTotals() {
+            let subtotal = 0;
+
+            // Loop through each product row
+            document.querySelectorAll(".ref-product").forEach((product) => {
+                const priceElement = product.querySelector(".ref-price-col .ref-product-price");
+                const quantityInput = product.querySelector(".ref-quantity-col input");
+                const totalElement = product.querySelector(".ref-total-col .ref-product-total-sum");
+
+                const price = parseFloat(priceElement.textContent.replace("Rs. ", "").trim());
+                const quantity = parseInt(quantityInput.value);
+
+                if (!isNaN(price) && !isNaN(quantity)) {
+                    const total = price * quantity; // Calculate total for the product
+                    totalElement.textContent = `Rs. ${total.toFixed(2)}`; // Update total for the row
+                    subtotal += total; // Add to subtotal
+                }
+            });
+
+            // Update the subtotal element
+            const subtotalElement = document.querySelector(".ref-subtotal");
+            if (subtotalElement) {
+                subtotalElement.textContent = `Subtotal: Rs. ${subtotal.toFixed(2)}`;
+            }
+        }
+
+        // Attach event listeners to quantity inputs
+        document.querySelectorAll(".ref-quantity-col input").forEach((input) => {
+            input.addEventListener("input", calculateTotals);
+        });
+
+        // Initial calculation on page load
+        calculateTotals();
+    });
+
+</script>
+
 {% endblock %}

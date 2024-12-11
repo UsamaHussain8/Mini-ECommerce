@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect 
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import Cart, CartItem
 from Products.models import Product
@@ -22,4 +23,13 @@ def display_cart(request):
     cart = Cart.objects.get(store_user = request.user.storeuser)
     cart_item = list(CartItem.objects.filter(cart = cart))
     total_price = cart.calculate_total_price()
+    print(total_price)
     return render(request, "Cart/cart_details.html", context={"items": cart_item, "price": total_price})
+
+def count_cart_items(request):
+    if request.user.is_authenticated:
+        cart = Cart.objects.get(store_user = request.user.storeuser)
+        cart_item = list(CartItem.objects.filter(cart = cart))
+        num_items = len(cart_item) if len(cart_item) else 0
+        return JsonResponse({"count": num_items})
+    return JsonResponse({"count": 0})
