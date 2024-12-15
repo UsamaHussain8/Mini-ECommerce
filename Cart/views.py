@@ -4,6 +4,21 @@ from django.contrib.auth.decorators import login_required
 from .models import Cart, CartItem
 from Products.models import Product
 
+@login_required(login_url = "login_view")
+def display_cart(request):
+    cart = Cart.objects.get(store_user = request.user.storeuser)
+    cart_item = list(CartItem.objects.filter(cart = cart))
+    total_price = cart.calculate_total_price()
+    return render(request, "Cart/cart_details.html", context={"items": cart_item, "price": total_price})
+
+def count_cart_items(request):
+    if request.user.is_authenticated:
+        cart = Cart.objects.get(store_user = request.user.storeuser)
+        cart_item = list(CartItem.objects.filter(cart = cart))
+        num_items = len(cart_item) if len(cart_item) else 0
+        return JsonResponse({"count": num_items})
+    return JsonResponse({"count": 0})
+
 def add_item_to_cart(request, slug):
     product = Product.objects.prefetch_related('tags').get(slug = slug)
     current_user = request.user
@@ -19,17 +34,35 @@ def add_item_to_cart(request, slug):
     return redirect("cart")
 
 @login_required(login_url = "login_view")
-def display_cart(request):
+def decrease_cart_item(request, slug):
+    #slug = request.GET.get('slug')
+    product = Product.objects.prefetch_related('tags').get(slug = slug)
     cart = Cart.objects.get(store_user = request.user.storeuser)
-    cart_item = list(CartItem.objects.filter(cart = cart))
-    total_price = cart.calculate_total_price()
-    print(total_price)
-    return render(request, "Cart/cart_details.html", context={"items": cart_item, "price": total_price})
+    cart_item = CartItem.objects.get(cart = cart, product = product)
 
-def count_cart_items(request):
-    if request.user.is_authenticated:
-        cart = Cart.objects.get(store_user = request.user.storeuser)
-        cart_item = list(CartItem.objects.filter(cart = cart))
-        num_items = len(cart_item) if len(cart_item) else 0
-        return JsonResponse({"count": num_items})
-    return JsonResponse({"count": 0})
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+
+    return redirect("cart")
+
+@login_required(login_url = "login_view")
+def remove_item_from_cart(request, slug):
+    #slug = request.GET.get('slug')
+    product = Product.objects.prefetch_related('tags').get(slug = slug)
+    
+    cart = Cart.objects.get(store_user = request.user.storeuser)
+    cart_item = CartItem.objects.get(cart = cart, product = product)
+    cart_item.delete()
+
+    return redirect("cart")
+
+@login_required(login_url = "login_view")
+def clear_cart(request):
+    cart = Cart.objects.get(store_user = request.user.storeuser)
+    cart_items = CartItem.objects.filter(cart = cart)
+    cart_items.delete()
+
+    return redirect("cart")
