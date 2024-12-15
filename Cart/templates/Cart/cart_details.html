@@ -8,6 +8,8 @@
 
 {% block js_files %}
 <script src="{% static 'js/cart_count.js' %}" defer></script>
+<script src="{% static 'js/decrease_cart_items.js' %}" defer></script>
+<script src="{% static 'js/discard_cart_items.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -49,15 +51,18 @@
                                     <div class="ref-product-quantity">
                                         <div class="ref-quantity-container" data-reflow-product="1168761308" data-reflow-max-qty="999" data-reflow-quantity="2">
                                             <div class="ref-quantity-widget">
-                                                <div class="ref-decrease"><span></span></div><input class="ref-product-quantity" type="text" value="{{ item.quantity }}" />
+                                                <div class="ref-decrease"><span></span></div>
+                                                <input class="ref-product-quantity" type="text" value="{{ item.quantity }}" />
                                                 <div class="ref-increase"><span></span></div>
                                             </div>
                                         </div>
                                         <div class="ref-product-qty-message"></div>
                                     </div>
-                                    <div class="ref-product-remove"><svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 48 48">
+                                    <div class="ref-product-remove">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 48 48">
                                             <path fill="currentColor" d="M13.05 42q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.5H8v-3h9.4V6h13.2v1.5H40v3h-2.05V39q0 1.2-.9 2.1-.9.9-2.1.9Zm21.9-31.5h-21.9V39h21.9Zm-16.6 24.2h3V14.75h-3Zm8.3 0h3V14.75h-3Zm-13.6-24.2V39Z"></path>
-                                        </svg></div>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -69,12 +74,13 @@
                         <div class="ref-product-quantity">
                             <div class="ref-quantity-container" data-reflow-product="1168761308" data-reflow-max-qty="999" data-reflow-quantity="2">
                                 <div class="ref-quantity-widget">
-                                    <div class="ref-decrease"><span></span></div><input type="text" value="{{item.quantity}}" />
-                                    <div class="ref-increase"><span></span></div>
+                                    <div class="ref-decrease" data-item-slug="{{ item.product.slug }}"><span></span></div>
+                                    <input type="text" value="{{item.quantity}}" />
+                                    <div class="ref-increase" data-item-slug="{{ item.product.slug }}"><span></span></div>
                                 </div>
                             </div>
                             <div class="ref-product-qty-message"></div>
-                            <div class="ref-product-remove">Remove</div>
+                            <div class="ref-product-remove" data-item-slug="{{ item.product.slug }}">Remove</div>
                         </div>
                     </div>
                     <div class="ref-total-col">
@@ -259,6 +265,7 @@
 {% block scripts %}
 <script>
     const apiUrl="{% url 'num_cart_items' %}";
+
     document.addEventListener("DOMContentLoaded", () => {
         // Function to calculate totals
         function calculateTotals() {
@@ -294,7 +301,7 @@
 
         // Initial calculation on page load
         calculateTotals();
-    });
+    });   
 
 </script>
 
