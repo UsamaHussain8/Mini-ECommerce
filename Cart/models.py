@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from core.models import StoreUser
 from Products.models import Product
+from django.core.exceptions import ValidationError
 
 class Cart(models.Model):
     store_user = models.OneToOneField(StoreUser, on_delete=models.CASCADE)
@@ -22,3 +23,11 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.product} with {self.quantity} number of items'
+
+    def clean(self):
+        if self.quantity > self.product.quantity:
+            raise ValidationError(f"Only {self.product.quantity} items available in stock.")
+        
+    def save(self, *args, **kwargs):
+        self.full_clean()  # Ensure validation is applied
+        super().save(*args, **kwargs)
